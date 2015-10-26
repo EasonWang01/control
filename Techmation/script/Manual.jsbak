@@ -1,0 +1,488 @@
+function showDiv(id){
+	if(id == "btn_ManualLocation")
+	{
+		document.getElementById("div_SetPosition").style.display="block"; 
+	}
+	else if(id == "btn_SetManualSpeed")
+	{
+		document.getElementById("div_SetSpeed").style.display="block";
+	}
+}
+
+function hideDiv(id){
+	if(id == "btn_HideSetPosition")
+	{
+		document.getElementById("div_SetPosition").style.display="none"; 
+	}
+	else if(id =="btn_HideSetSpeed")
+	{
+		document.getElementById("div_SetSpeed").style.display="none"; 
+	}
+}
+
+function BtnDown(id)
+{
+	if(id == "btn_Stop")
+	{
+		document.getElementById(id).style.background="url(../image/Stop_Down.png)";
+	}
+	else if(id == "btn_Manual")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnDown_12732.png)";
+		writeValueFN("true", "unit/dHdGlobal.gboManual");
+	}
+	else if(id == "btn_Stop2")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_9696.png)";
+	}
+	else if(id == "btn_Homing")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_9696.png)";
+		writeValueFN("true", "unit/dHdGlobal.gboMoveToStartPos");
+	}
+	else if(id == "btn_Motor")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnStartOn.png)";
+		writeValueFN("true", "unit/dHdGlobal.gboEnableaxes");
+	}
+	else if(id == "btn_ManualLocation" || id == "btn_SetManualSpeed")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnDown_127.png)";
+	}
+	else if(id == "btn_Y1Z1_up")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_top.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[2].bojogpositiv");
+	}
+	else if(id == "btn_Y2Z2_up")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_top.png)";
+	}
+	else if(id == "btn_Y1Z1_left")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_left.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[1].bojognegative");
+	}
+	else if(id == "btn_Y2Z2_left")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_left.png)";
+	}
+	else if(id == "btn_Y1Z1_right")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_right.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[1].bojogpositiv");
+	}
+	else if(id == "btn_Y2Z2_right")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_right.png)";
+	}
+	else if(id == "btn_Y1Z1_down")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_bottom.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[2].bojognegative");
+	}
+	else if(id == "btn_Y2Z2_down")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_bottom.png)";
+	}
+	else if(id == "btn_X_left")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_left8150.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[0].bojognegative");
+	}
+	else if(id == "btn_X_right")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnDown_right7550.png)";
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[0].bojogpositiv");
+	}
+	else if(id == "btn_+Y" || id == "btn_-Y" || id == "btn_+Z" || id == "btn_-Z")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnDown.png)";
+	}
+	else if(id == "btn_X_Move")
+	{
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[0].boexecutepos");
+	}
+	else if(id == "btn_Y1_Move")
+	{
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[1].boexecutepos");
+	}
+	else if(id == "btn_Z1_Move")
+	{
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[2].boexecutepos");
+	}
+	else if(id == "btn_Y2_Move")
+	{
+
+	}
+	else if(id == "btn_Z2_Move")
+	{
+
+	}
+	else
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnDown_7434.png)";
+	}
+}
+
+function BtnUp(id)
+{
+	if(id == "btn_Stop")
+	{
+		document.getElementById(id).style.background="url(../image/Stop_Up.png)";
+	}
+	else if(id == "btn_Manual")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnUp_12732.png)";
+		writeValueFN("false", "unit/dHdGlobal.gboManual");
+	}
+	else if(id == "btn_Stop2")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_9696.png)";
+	}
+	else if(id == "btn_Homing")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_9696.png)";
+		writeValueFN("false", "unit/dHdGlobal.gboMoveToStartPos");
+	}
+	else if(id == "btn_Motor")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnStartOff.png)";
+		writeValueFN("false", "unit/dHdGlobal.gboEnableaxes");
+	}
+	else if(id == "btn_ManualLocation" || id == "btn_SetManualSpeed")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnUp_127.png)";
+	}
+	else if(id == "btn_Y1Z1_up")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_top.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[2].bojogpositiv");
+	}
+	else if(id == "btn_Y2Z2_up")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_top.png)";
+	}
+	else if(id == "btn_Y1Z1_left" )
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_left.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[1].bojognegative");
+	}
+	else if(id == "btn_Y2Z2_left")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_left.png)";
+	}
+	else if(id == "btn_Y1Z1_right" )
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_right.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[1].bojogpositiv");
+	}
+	else if( id == "btn_Y2Z2_right")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_right.png)";
+	}
+	else if(id == "btn_Y1Z1_down")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_bottom.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[2].bojognegative");
+	}
+	else if(id == "btn_Y2Z2_down")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_bottom.png)";
+	}
+	else if(id == "btn_X_left")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_left8150.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[0].bojognegative");
+	}
+	else if(id == "btn_X_right")
+	{
+		document.getElementById(id).style.background="url(../image/bg_BtnUp_right7550.png)";
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[0].bojogpositiv");
+	}
+	else if(id == "btn_+Y" || id == "btn_-Y" || id == "btn_+Z" || id == "btn_-Z")
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnUp.png)";
+	}
+	else if(id == "btn_X_Move")
+	{
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[0].boexecutepos");
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[0].boexecutestop");
+	}
+	else if(id == "btn_Y1_Move")
+	{
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[1].boexecutepos");
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[1].boexecutestop");
+	}
+	else if(id == "btn_Z1_Move")
+	{
+		writeValueFN("false", "unit/xPTemplAxisFB.gashmidata[2].boexecutepos");
+		writeValueFN("true", "unit/xPTemplAxisFB.gashmidata[2].boexecutestop");
+	}
+	else if(id == "btn_Y2_Move")
+	{
+
+	}
+	else if(id == "btn_Z2_Move")
+	{
+
+	}
+	else
+	{
+		//document.getElementById(id).style.background="url(../image/bg_BtnUp_7434.png)";
+	}
+}
+
+function buildSubscription() {
+
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_X_Postion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatValue";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.x.position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_X_Speed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatSpeed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.x.velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Y1_Postion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatValue";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.y.position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Y1_Speed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatSpeed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.y.velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Z1_Postion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatValue";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.z.position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Z1_Speed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "floatSpeed";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "to/Path.bcs.z.velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_MoldOpenComplete";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "MoldStatus";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/dGlobal.gbiMoldOpenComplete";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_MoldCloseSafety";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "MoldStatus";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/dGlobal.gboMoldCloseSafety";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_MotionMode";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "gboAutomatic";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/dHdGlobal.gbyMotionMode";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+    SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "btn_Motor";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "MotorState";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/dHdGlobal.gboPower";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_X_MovePistion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gashmidata[0].saxisdata.sposdata.r32position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Y1_MovePistion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gashmidata[1].saxisdata.sposdata.r32position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Z1_MovePistion";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gashmidata[2].saxisdata.sposdata.r32position";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+
+
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_X_ManualVelocity";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gasHMIData[0].sAxisData.sPosData.r32Velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;	
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Y1_ManualVelocity";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gasHMIData[1].sAxisData.sPosData.r32Velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Z1_ManualVelocity";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gasHMIData[2].sAxisData.sPosData.r32Velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Y2_ManualVelocity";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gasHMIData[3].sAxisData.sPosData.r32Velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "inp_Z2_ManualVelocity";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "default";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/xPTemplAxisFB.gasHMIData[4].sAxisData.sPosData.r32Velocity";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+	
+	
+	SubscriptionData.ItemList[SubscriptionData.LastIndex] = new Object();
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].id = "btn_Stop";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].style = "gboEStop";  
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemPath = "SIMOTION";
+
+    SubscriptionData.ItemList[SubscriptionData.LastIndex].itemName = "unit/dHdGlobal.gboEstopState";
+
+    SubscriptionData.LastIndex = SubscriptionData.LastIndex + 1;
+    //Starte Aktualisierung
+	
+    SubscriptionInstance = subscription(SubscriptionInstance, SubscriptionCycle, SubscriptionData.ItemList);
+}

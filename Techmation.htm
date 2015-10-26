@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<!--Insert Title here-->
+
+<title>Techmation HMI</title>
+<meta http-equiv="content-type" content="text/html; charset=GBK"/>
+<!--Insert Stylesheet(s) here-->
+
+<link href="Techmation/style/styles.css" rel="stylesheet" type="text/css" />
+
+<!--Insert JavaScript-File(s) here-->
+
+<script src="Techmation/script/main.js" type="text/javascript"></script>
+<script src="Techmation/script/Techmation.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="Techmation/script/common.js"></script>
+
+<script type="text/javascript" src="Techmation/script/opcxml.js"></script>
+
+</head>
+<body onload="buildSubscription()">
+	<div id="div_StatusBar">
+		<div style="width:430px; height:48px; float:left;   ">
+			<table  class=table1>
+				<tr>
+					<td class="font">X:<td>
+					<td><input type="text" id="inp_X_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Y1:</td>				
+					<td><input type="text" id="inp_Y1_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Z1:</td>
+					<td><input type="text" id="inp_Z1_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Y2:</td>
+					<td><input type="text" id="inp_Y2_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Z2:</td>
+					<td><input type="text" id="inp_Z2_Postion" class="input_Postion" readonly="readonly" value=""></td>
+				</tr>
+			</table>	
+			<table>
+				<tr>
+					<td><input type="text" id="inp_X_Speed" class="input_Speed" readonly="readonly" value=""></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit" /><td>
+									
+					<td><input type="text" id="inp_Y1_Speed" class="input_Speed" readonly="readonly" value="" style="width:48px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Z1_Speed" class="input_Speed" readonly="readonly" value="" style="width:50px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Y2_Speed" class="input_Speed" readonly="readonly" value="" style="width:50px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Z2_Speed" class="input_Speed" readonly="readonly" value=""></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+				</tr>
+			</table>
+		</div>
+		<table style="width:100%; height:50px; float:left;">
+			<tr>
+				<td><input type="text" id="inp_MoldOpenComplete" class="input_Text" style="width:70px; text-align:left; color:#3b88d0;"  readonly="readonly" value="開模完成"></td>
+				<td><input type="text" id="inp_MoldCloseSafety" class="input_Text" style="width:70px; text-align:right; color:#3b88d0;" readonly="readonly" value="關模安全"></td>
+				
+				<td><input type="text" id="inp_Pose"class="input_Text" style="width:85px;" readonly="readonly"></td>
+				
+				<td><input type="text" id="inp_MotionMode"  class="input_Text" style="width:70px;" readonly="readonly" value="手動">
+				    <input type="text" id="inp_OperationMode" class="input_Text" style="width:70px;"readonly="readonly" value="一般模式">
+				</td>
+				
+				<td><input type="text" class="input_Text" style="width:125px; font-size:16px;" readonly="readonly" value="ABCDEFGH"></td>
+				
+				<td><image src="Techmation/image/Priv.png" /></td>
+				<td><input type="text" class="input_Text" style="width:60px; font-size:14px;" readonly="readonly" value="WELSON"></td>
+				<td><input type="button" id="btn_Show" class="font" style="width:65px; height:28px; color:black;" value="選項" onClick="showToolbar()"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="div_Content" style="position:relative;">
+		<div style="margin-top:5px; width:225px; height:621px; float:left;">
+			<input type="button" id="btn_EStop" value="緊急停止" onclick="writeSingleVar(this.id)" style="width:161px; height:163px;  margin-top:5px; margin-left:30px; font-size:24px; color:#fce95f; font-weight:bold; border:0px; background:url(Techmation/image/Stop_Up.png)">
+			<div style="width:163px; height:30px; margin-top:10px; margin-left:25px; -webkit-border-radius:5px; -moz-border-radius:5px; border:2px solid #44b9ef; background-color:#ffffff;">
+				<table style="width:163px; height:30px;">
+					<tr>
+						<td style="font-size:18px; text-align:Center;">預計產量:</td>
+						<td><input type="text" id="inp_Pre_Production" value="" readonly="readonly" style="width:70px; border:0px; background:transparent; font-size:16px;"></td>
+					</tr>
+				</table>
+			</div>
+			<div style="width:163px; height:30px; margin-top:10px; margin-left:25px; -webkit-border-radius:5px; -moz-border-radius:5px; border:2px solid #44b9ef; background-color:#ffffff;">
+				<table style="width:163px; height:30px;">
+					<tr>
+						<td style="font-size:18px; text-align:Center;">目前產量:</td>
+						<td><input type="text" id="inp_Cur_Production" value=""  readonly="readonly" style="width:70px; border:0px; background:transparent; font-size:16px;"></td>
+					</tr>
+				</table>
+			</div>
+			<input type="button" id="btn_Reset" value="統計歸零" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:163px; height:35px; margin-top:20px; margin-left:25px; font-size:20px; font-weight:bold; background-color:#fbc350;">
+			<input type="button" id="btn_PickerMMI" value="機械手*注塑機" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:163px; height:35px; margin-top:20px; margin-left:25px;  font-size:20px; font-weight:bold; color:white; background-color:#7bbbf8;">
+			<input type="button" id="btn_Auto" value="全自動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id); buildSubscription()" style="width:163px; height:35px; margin-top:10px; margin-left:25px; font-size:20px; font-weight:bold; color:white; background-color:#7bbbf8;">
+			<input type="button" id="btn_Semi_auto" value="半自動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id);buildSubscription()" style="width:163px; height:35px; margin-top:10px; margin-left:25px; font-size:20px; font-weight:bold; color:white; background-color:#7bbbf8;">
+			<input type="button" id="btn_Conveyor" value="輸送機" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id);buildSubscription()" style="width:163px; height:35px; margin-top:10px; margin-left:25px; font-size:20px; font-weight:bold; color:white; background-color:#7bbbf8;">
+			<div style="width:200; height:100px; margin-top:15px;">
+				<input type="button" id="btn_Continue" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:53px; height:53px; margin-left:10px; border:0px; background:url(Techmation/image/bg_ContinueUp.png)">
+				<input type="button" id="btn_Start" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:69px; height:71px; border:0px; background:url(Techmation/image/bg_StartUp.png)">
+				<input type="button" id="btn_Stop2" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:53px; height:53px; border:0px; background:url(Techmation/image/bg_StopUp.png)">
+			</div>
+		</div>
+		<div style="width:794px; height:604px; margin-top:10px; border:0px; float:left; background:url(Techmation/image/linetable_1.png);">
+		</div>
+		<div id="div_Toolbar" style="width:252px; height:513px; position:absolute; left:700px; top:50px; background:url(Techmation/image/bg_252513.png); display:none;">
+			<input	type="button" style="width:29px; height:29px; margin-left:220px; border:0px; background:url(Techmation/image/close.png);" onclick="hideToolbar()"/>
+			<input  type="button" value="狀態頁"  style="width:168px; height:38px; margin-left:45px; margin-top:50px; font-size:20px; font-weight:bold; border:0px; background-color:#fbc350;"/>
+			<input  type="button" value="手動頁" onclick="window.location.replace('Techmation/src/Manual.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="編輯頁" onclick="window.location.replace('Techmation/src/Compile_Choose.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="監測頁" onclick="window.location.replace('Techmation/src/Picker_Status.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="參數頁" onclick="window.location.replace('Techmation/src/Motor_Param.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="警報頁" onclick="window.location.replace('Techmation/src/Alarm.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+		</div>
+	<div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

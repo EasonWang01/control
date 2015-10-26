@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<!--Insert Title here-->
+
+<title>Techmation HMI</title>
+<meta http-equiv="content-type" content="text/html; charset=GBK"/>
+<!--Insert Stylesheet(s) here-->
+
+<link href="../style/styles.css" rel="stylesheet" type="text/css" />
+
+<!--Insert JavaScript-File(s) here-->
+
+<script src="../script/main.js" type="text/javascript"></script>
+
+<script src="../script/Manual.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="../script/common.js"></script>
+
+<script type="text/javascript" src="../script/opcxml.js"></script>
+<style type="text/css">
+		.inp_AxisName{	
+			width:80px;
+			height:25px;
+			border:0px;
+			font-size:16px;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			text-align:center;
+		}
+		.inp_ParamValue{	
+			width:80px;
+			height:22px;
+			font-size:16px;
+			text-align:right;
+		}
+		.btn_Manual{
+			width:74px; 
+			height:34px; 
+			//border:0px; 
+			//-webkit-border-radius:5px;
+			//-moz-border-radius:5px;
+			font-size:16px;
+			color:white;		
+			//background:url(../image/bg_BtnUp_7434.png);
+			background-color:#7bbbf8;
+		}
+</style>
+</head>
+<body onload="buildSubscription();" oncontextmenu="return false" onselectstart="return false">
+	<div id="div_StatusBar">
+		<div style="width:430px; height:48px; float:left;">
+			<table>
+				<tr>
+					<td class="font">X:<td>
+					<td><input type="text" id="inp_X_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Y1:</td>				
+					<td><input type="text" id="inp_Y1_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Z1:</td>
+					<td><input type="text" id="inp_Z1_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Y2:</td>
+					<td><input type="text" id="inp_Y2_Postion" class="input_Postion" readonly="readonly" value=""></td>
+					
+					<td class="font">Z2:</td>
+					<td><input type="text" id="inp_Z2_Postion" class="input_Postion" readonly="readonly" value=""></td>
+				</tr>
+			</table>	
+			<table>
+				<tr>
+					<td><input type="text" id="inp_X_Speed" class="input_Speed" readonly="readonly" value=""></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit" /><td>
+									
+					<td><input type="text" id="inp_Y1_Speed" class="input_Speed" readonly="readonly" value="" style="width:48px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Z1_Speed" class="input_Speed" readonly="readonly" value="" style="width:50px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Y2_Speed" class="input_Speed" readonly="readonly" value="" style="width:50px;"></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+					
+					<td><input type="text" id="inp_Z2_Speed" class="input_Speed" readonly="readonly" value=""></td>
+					<td><input type="text" value="mm/s" readonly="readonly" class="input_Speed_unit"/><td>
+				</tr>
+			</table>
+		</div>
+		<table style="width:590px; height:50px; float:left;">
+			<tr>
+				<td><input type="text" id="inp_MoldOpenComplete" class="input_Text" style="width:70px; text-align:left; color:#3b88d0;"  readonly="readonly" value="開模完成"></td>
+				<td><input type="text" id="inp_MoldCloseSafety" class="input_Text" style="width:70px; text-align:right; color:#3b88d0;" readonly="readonly" value="關模安全"></td>
+				
+				<td><input type="text" class="input_Text" style="width:80px;" readonly="readonly" value="180度"></td>
+				
+				<td><input type="text" id="inp_MotionMode" class="input_Text" readonly="readonly" value="手動"></td>
+				
+				<td><input type="text" class="input_Text" style="width:130px; font-size:16px;" readonly="readonly" value="ABCDEFGH"></td>
+				
+				<td><image src="../image/Priv.png" /></td>
+				<td><input type="text" class="input_Text" style="width:60px; font-size:14px;" readonly="readonly" value="WELSON"></td>
+				<td><input type="button" id="btn_Show" class="font" style="width:70px; height:28px; color:black;" value="選項" onClick="showToolbar()"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="div_Content" style="position:relative;">
+		<div style="margin-top:5px; width:627px; height:621px; float:left;">
+			<div style="width:200px; height:200px; float: left;">
+				<input type="button" id="btn_Stop" value="緊急停止" onclick="writeSingleVar(this.id)" style="width:161px; height:163px;  float:left; margin-top:5px; margin-left:30px; font-size:28px; color:#fce95f; font-weight:bold; border:0px; background:url(../image/Stop_Up.png)">
+				<input type="button" id="btn_Manual" value="手動"  onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:127px; height:32px; margin-left:45px; font-size:20px; background-color:#7bbbf8;"/>
+			</div>
+			<table style="width:225px; height:175px; margin-left:15px; margin-top:10px; float:left;">
+				<tr>
+					<td><input type="button" id="btn_Clamp01" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="夾具01"/></td>
+					<td><input type="button" id="btn_Clamp02" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="夾具02"/></td>
+					<td><input type="button" id="btn_Clamp03" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="夾具03"/></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_Cupula01" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="吸盤01"/></td>
+					<td><input type="button" id="btn_Cupula02" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="吸盤02"/></td>
+					<td><input type="button" id="btn_Cupula03" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="吸盤03"/></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td><input type="button" id="btn_Reserve01" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="保留01"/></td>
+					<td><input type="button" id="btn_Reserve02" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="保留02"/></td>
+					<td><input type="button" id="btn_Reserve03" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="保留03"/></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_CAxis_0"  class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="C軸-0"/></td>
+					<td><input type="button" id="btn_CAxis_90" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="C軸-90"/></td>
+					<td><input type="button" id="btn_CAxis_180" class="btn_Manual" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" value="C軸-180"/></td>
+				</tr>
+			</table>
+			<table style="width:150px; height:175px; margin-left:10px; margin-top:10px;">
+				<tr>
+					<td><input type="button" id="btn_+Y" value="+Y同動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:74px; height:34px; font-size:16px; background-color:#fbbd4e;"/></td>
+					<td><input type="button" id="btn_-Y" value="-Y同動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:74px; height:34px; font-size:16px; background-color:#fbbd4e;"/></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_+Z" value="+Z同動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:74px; height:34px; font-size:16px; background-color:#fbbd4e;"/></td>
+					<td><input type="button" id="btn_-Z" value="-Z同動" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:74px; height:34px; font-size:16px; background-color:#fbbd4e;"/></td>
+				</tr>
+			</table>
+			<div style="width:580px; height:405px; margin-left:10px; margin-top:20px; -webkit-border-radius:5px; -moz-border-radius:5px; border:2px solid #44b9ef; background-color:white;">
+				<div style="width:580px; height:405px; background:url(../image/picker.png);">
+					<input type="button" id="btn_Motor" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:70px; height:70px; margin-left:500px; margin-top:10px; border:0px; background:url(../image/bg_BtnStartOn.png);"/>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top:2px; width:393px; height:610px; float:left; -webkit-border-radius:5px; -moz-border-radius:5px; border:2px solid #44b9ef;">
+			<div style="width:393px; height:175px;">
+				<div style="width:230px; height:175px; float:left;">
+					<table style="width:230px; margin-left:10px; margin-top:30px;">
+						<tr>
+							<td><input type="button" id="btn_Stop2" value="暫停停止" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:96px; height:96px; font-size:14px; border:0px; background:url(../image/bg_BtnUp_9696.png);" /></td>
+							<td><input type="button" id="btn_Homing" value="原點復歸" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:96px; height:96px; font-size:14px; border:0px; background:url(../image/bg_BtnUp_9696.png);" /></td>
+						</tr>
+					</table>
+				</div>			
+				<div style="width:150px; height:175px; float:left;">
+					<input type="button" id="btn_SetManualSpeed" value="手動速度設定" onclick="showDiv(this.id)" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:127px; height:32px; margin-left:15px; margin-top:35px; font-size:18px; background-color:#7bbbf8;" />
+					<input type="button" id="btn_ManualLocation" value="手動定位" onclick="showDiv(this.id)" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:127px; height:32px; margin-left:15px; margin-top:30px; font-size:18px; background-color:#7bbbf8;" />
+				</div>
+			</div>
+			<hr style="border:1px solid #44b9ef;"/>
+			<div style="width:395px; height:305px;">
+				<div style="width:195px; height:305px; float:left;">
+					<h3 style="margin-left:75px; margin-top:5px;">Y1/Z1</h3>
+					<table style="width:190px; height:40px; float:left; margin-top:10px; margin-left:5px; ">
+						<tr>
+							<td><input type="text" id="btn_Y1Z1_Horizontal" value="姿勢水平" readonly="readonly" style="width:80px; height:25px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px;"/><td>
+							<td><input type="text" id="btn_Y1Z1_Vertical" value="姿勢垂直"  readonly="readonly"  style="width:80px; height:25px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px; "/><td>
+						</tr>
+					</table>
+					<td><input type="text" id="btn_Y1Z1_Vertical" value="主臂上升限"  readonly="readonly"  style="width:175px; height:25px; margin-left:6px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px; "/><td>
+					<div style="width:166px; height:166px; margin-left:13px; margin-top:20px; border:0px; background:url(../image/bg_166.png);">
+						<input type="button" id="btn_Y1Z1_up" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:50px; height:62px; margin-left:58px; margin-top:-4px; border:0px; background:url(../image/bg_BtnUp_top.png);"/>
+						<div style="width:170px; height:51px;">
+							<input type="button" id="btn_Y1Z1_left" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:62px; height:51px; margin-left:-4px; margin-top:0px; float:left; border:0px; background:url(../image/bg_BtnUp_left.png);"/>
+							<input type="button" id="btn_Y1Z1_right" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:62px; height:51px; margin-left:50px; margin-top:0px; float:left; border:0px; background:url(../image/bg_BtnUp_right.png);"/>
+						</div>
+						<input type="button" id="btn_Y1Z1_down" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:50px; height:62px; margin-left:45px; margin-left:58px; border:0px; background:url(../image/bg_BtnUp_bottom.png);"/>
+					</div>
+				
+				</div>
+				<hr size="305" style="border:1px solid #44b9ef; float:left;"/>
+				<div style="width:195px; height:305px; float:left;">
+					<h3 style="margin-left:75px; margin-top:5px;">Y2/Z2</h3>
+					<table style="width:190px; height:40px; float:left; margin-top:10px; margin-left:5px; ">
+						<tr>
+							<td><input type="text" id="btn_Y2Z2_Horizontal" value="姿勢水平" readonly="readonly" style="width:80px; height:25px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px;"/><td>
+							<td><input type="text" id="btn_Y2Z2_Vertical" value="姿勢垂直"  readonly="readonly"  style="width:80px; height:25px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px; "/><td>
+						</tr>
+					</table>
+					<td><input type="text" id="btn_Y1Z1_Vertical" value="主臂上升限"  readonly="readonly"  style="width:175px; height:25px; margin-left:6px; text-align:center; -webkit-border-radius:5px; -moz-border-radius:5px; border:1px solid #44b9ef; font-size:16px; "/><td>
+					<div style="width:166px; height:166px; margin-left:13px; margin-top:20px; border:0px; background:url(../image/bg_166.png);">
+						<input type="button" id="btn_Y2Z2_up" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:50px; height:62px; margin-left:58px; margin-top:-4px; border:0px; background:url(../image/bg_BtnUp_top.png);"/>
+						<div style="width:170px; height:51px;">
+							<input type="button" id="btn_Y2Z2_left" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:62px; height:51px; margin-left:-4px; margin-top:0px; float:left; border:0px; background:url(../image/bg_BtnUp_left.png);"/>
+							<input type="button" id="btn_Y2Z2_right" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:62px; height:51px; margin-left:50px; margin-top:0px; float:left; border:0px; background:url(../image/bg_BtnUp_right.png);"/>
+						</div>
+						<input type="button" id="btn_Y2Z2_down" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:50px; height:62px; margin-left:45px; margin-left:58px; border:0px; background:url(../image/bg_BtnUp_bottom.png);"/>
+					</div>
+				</div>
+			</div>
+			<hr style="border:1px solid #44b9ef;"/>
+			<div style="width:390px; height:125px; float:left;">
+				<h3 style="margin-left:195px; margin-top:20px">X</h3>
+				<table style="width:350px; height:60px; margin-left:25px;">
+					<tr>
+						<td><input type="text" value="型內限" readonly="readonly" style="width:91px; height:32px; font-size:20px; text-align:center; border:1px solid #44b9ef; -webkit-border-radius:5px; -moz-border-radius:5px;"/></td>
+						<td>
+							<input type="button" id="btn_X_left" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:81px; height:50px;  border:0px; background:url(../image/bg_BtnUp_left8150.png);"/>
+							<input type="button" id="btn_X_right" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:75px; height:50px; margin-left:-10px; border:0px; background:url(../image/bg_BtnUp_right7550.png);"/>
+						</td>
+						<td><input type="text" value="型外限" readonly="readonly" style="width:91px; height:32px; font-size:20px; text-align:center; border:1px solid #44b9ef; -webkit-border-radius:5px; -moz-border-radius:5px;"/></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="div_Toolbar" style="width:252px; height:513px; position:absolute; left:700px; top:50px; background:url(../image/bg_252513.png); display:none;">
+			<input	type="button" style="width:29px; height:29px; margin-left:220px; border:0px; background:url(../image/close.png);" onclick="hideToolbar()"/>
+			<input  type="button" value="狀態頁"  onclick="window.location.replace('../../Techmation.htm')"  style="width:168px; height:38px; margin-left:45px; margin-top:50px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="手動頁" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="編輯頁" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="監測頁" onclick="window.location.replace('Picker_Status.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="參數頁" onclick="window.location.replace('Motor_Param.htm')" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+			<input  type="button" value="警報頁" style="width:168px; height:38px; margin-left:45px; margin-top:20px; font-size:20px; font-weight:bold;"/>
+		</div>
+		<div id="div_SetPosition" style="width:252px; height:513px; position:absolute; left:700px; top:50px; background:url(../image/bg_252513.png); display:none;">
+			<input	type="button" id="btn_HideSetPosition" style="width:29px; height:29px; margin-left:220px; border:0px; background:url(../image/close.png);" onclick="hideDiv(this.id)"/>
+			<table style="width:220px; height:300px; margin-left:20px; margin-top:80px;">
+				<tr>
+					<td></td>
+					<td><input type="text" readonly="readonly" class="inp_AxisName" value="位置"/></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_X_Move" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:95px; height:30px; font-size:16px;" value="X移動"/></td>
+					<td><input type="text" id="inp_X_MovePistion" value="" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,2)"/></td>
+					<td>mm</td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_Y1_Move" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:95px; height:30px; font-size:16px;" value="Y1移動"/></td>
+					<td><input type="text" id="inp_Y1_MovePistion" value="" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,2)"/></td>
+					<td>mm</td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_Z1_Move" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:95px; height:30px; font-size:16px;" value="Z1移動"/></td>
+					<td><input type="text" id="inp_Z1_MovePistion" value="" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,2)"/></td>
+					<td>mm</td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_Y2_Move" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:95px; height:30px; font-size:16px;" value="Y2移動"/></td>
+					<td><input type="text" id="inp_Y2_MovePistion" value="" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,2)"/></td>
+					<td>mm</td>
+				</tr>
+				<tr>
+					<td><input type="button" id="btn_Z2_Move" onmousedown="BtnDown(this.id)" onmouseup="BtnUp(this.id)" style="width:95px; height:30px; font-size:16px;" value="Z2移動"/></td>
+					<td><input type="text" id="inp_Z2_MovePistion" value="" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,2)"/></td>
+					<td>mm</td>
+				</tr>
+			</table>
+		</div>
+		<div id="div_SetSpeed" style="width:252px; height:513px; position:absolute; left:400px; top:50px; background:url(../image/bg_252513.png); display:none;">
+			<input	type="button" id="btn_HideSetSpeed" style="width:29px; height:29px; margin-left:220px; border:0px; background:url(../image/close.png);" onclick="hideDiv(this.id)"/>
+			<table style="width:220px; height:300px; margin-left:20px; margin-top:80px;">
+				<tr>
+					<td></td>
+					<td><input type="text" readonly="readonly" class="inp_AxisName" value="速度"/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text"  readonly="readonly" class="inp_AxisName" value="X軸"/></td>
+					<td><input type="text" id="inp_X_ManualVelocity" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,1)"/></td>
+					<td>mm/s</td>
+				</tr>
+				<tr>
+					<td><input type="text"  readonly="readonly" class="inp_AxisName" value="Y1軸"/></td>
+					<td><input type="text" id="inp_Y1_ManualVelocity" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,1)"/></td>
+					<td>mm/s</td>
+				</tr>
+				<tr>
+					<td><input type="text"  readonly="readonly" class="inp_AxisName" value="Z1軸"/></td>
+					<td><input type="text" id="inp_Z1_ManualVelocity" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,1)"/></td>
+					<td>mm/s</td>
+				</tr>
+				<tr>
+					<td><input type="text"  readonly="readonly" class="inp_AxisName" value="Y2軸"/></td>
+					<td><input type="text" id="inp_Y2_ManualVelocity" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,1)"/></td>
+					<td>mm/s</td>
+				</tr>
+				<tr>
+					<td><input type="text"  readonly="readonly" class="inp_AxisName" value="Z2軸"/></td>
+					<td><input type="text" id="inp_Z2_ManualVelocity" onchange="writeSingleVar(this.id)" class="inp_ParamValue" onkeypress="return checkNum(event,1)"/></td>
+					<td>mm/s</td>
+				</tr>
+			</table>
+		</div>
+	<div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
